@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import csv
+import json
 # path="C:\\Program Files (x86)\\chromedriver.exe"
 # driver=webdriver.Chrome()
 
@@ -16,9 +17,9 @@ with open('C:\\xampp\\htdocs\\worldkoora\\Docs\\csv_test.csv',mode='r') as file_
         list1.append(ff)
     dictionary={}
     list2=[]
-   
- 
     
+ 
+   
     for line in list1:
         if cp!=0:
             print(f"insert into league({cp},'{line[0]}','{line[1]}')")
@@ -32,5 +33,10 @@ with open('C:\\xampp\\htdocs\\worldkoora\\Docs\\csv_test.csv',mode='r') as file_
         cp+=1
     dictionary['data']=list2
     
+    with open('Docs/jsonFile.json','w') as jsonfile:
+        json.dump(dictionary,jsonfile)
     # for key,value in dictionary.items:
     #     print(f'{key} , {value}')
+    
+    
+#pip instal schedule

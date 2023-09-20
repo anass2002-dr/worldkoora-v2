@@ -8,7 +8,7 @@ import json
 # path="C:\\Program Files (x86)\\chromedriver.exe"
 # driver=webdriver.Chrome()
 
-        
+ #hello       
 with open('C:\\xampp\\htdocs\\worldkoora\\Docs\\csv_test.csv',mode='r') as file_csv:
     csv_reader = csv.reader(file_csv, delimiter=',')
     list1=[]

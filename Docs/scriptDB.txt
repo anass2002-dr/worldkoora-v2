@@ -1,0 +1,324 @@
+DROP DATABASE IF EXISTS WorldKoora;
+CREATE DATABASE WorldKoora;
+use WorldKoora;
+drop table if exists BLOG;
+
+drop table if exists CITY;
+
+drop table if exists COACH;
+
+drop table if exists COUNTRY;
+
+drop table if exists LEAGUE;
+
+drop table if exists _MATCH ;
+
+drop table if exists MATCHINFOS;
+
+drop table if exists NEWS;
+
+drop table if exists PICTURE;
+
+drop table if exists PLAYER;
+
+drop table if exists PLAYERDETAILS;
+
+drop table if exists RAPPORT_DETAILS;
+
+drop table if exists RAPPORT_MATCH;
+
+drop table if exists REACTION;
+
+drop table if exists TEAM;
+
+drop table if exists TEAM_NATIONAL;
+
+drop table if exists VIDEO;
+
+/*==============================================================*/
+/* Table : BLOG                                                 */
+/*==============================================================*/
+create table BLOG
+(
+   BLOGID               char(10) not null,
+   NEWSID               int not null,
+   PICTUREID           int not null,
+   VIDEOID              int not null,
+   primary key (BLOGID)
+);
+
+/*==============================================================*/
+/* Table : CITY                                                 */
+/*==============================================================*/
+create table CITY
+(
+   CITYID               int not null auto_increment,
+   COUNTRYID            int not null,
+   LOGO                 text,
+   primary key (CITYID)
+);
+
+/*==============================================================*/
+/* Table : COACH                                                */
+/*==============================================================*/
+create table COACH
+(
+   COACHID              char(10) not null,
+   TEAMID               int not null,
+   FIRSTNAME            varchar(60),
+   LASTNAME             varchar(60),
+   DATEOFBIRTH        date,
+   PHOTO                char(150),
+   primary key (COACHID)
+);
+
+/*==============================================================*/
+/* Table : COUNTRY                                              */
+/*==============================================================*/
+create table COUNTRY
+(
+   COUNTRYID            int not null auto_increment,
+   COUNTRYNAME          char(60),
+   primary key (COUNTRYID)
+);
+
+/*==============================================================*/
+/* Table : LEAGUE                                               */
+/*==============================================================*/
+create table LEAGUE
+(
+   LEAGUEID              int not null auto_increment,
+   LIGUENAME            char(60),
+   COUNTRY              char(60),
+   primary key (LEAGUEID)
+);
+
+/*==============================================================*/
+/* Table : _MATCH                                              */
+/*==============================================================*/
+create table _MATCH
+(
+   MATCHID              int not null auto_increment,
+   TEAMA               int not null,
+   TEAMB           int not null,
+   LEAGUEID              int not null,
+   DATEANDTIME          datetime,
+   SCORETEAMA           int,
+   SCORETEAMB           int,
+   MATCHSTATUT          char(60),
+   primary key (MATCHID)
+);
+
+/*==============================================================*/
+/* Table : MATCHINFOS                                           */
+/*==============================================================*/
+create table MATCHINFOS
+(
+   MATCHINFOID          int not null auto_increment,
+   MATCHID              int not null,
+   PLAYERID             int not null,
+   REDCARD              bool,
+   YELLOWCARD           bool,
+   GOALS                bool,
+   ASSISTS              bool,
+   INJURY               bool,
+   primary key (MATCHINFOID)
+);
+
+/*==============================================================*/
+/* Table : NEWS                                                 */
+/*==============================================================*/
+create table NEWS
+(
+   NEWSID               int not null auto_increment,
+   TITLE              char(50),
+   DATEANDTIME        datetime,
+   DESCRIPTION        text,
+   primary key (NEWSID)
+);
+
+/*==============================================================*/
+/* Table : PICTURE                                             */
+/*==============================================================*/
+create table PICTURE
+(
+   PICTUREID           int not null auto_increment,
+   PATH                 char(200),
+   primary key (PICTUREID)
+);
+
+/*==============================================================*/
+/* Table : PLAYER                                               */
+/*==============================================================*/
+create table PLAYER
+(
+   PLAYERID             int not null auto_increment,
+   TEAMID               int not null,
+   TEAM_NATIONALID       int not null,
+   FIRSTNAME            varchar(60),
+   LASTNAME             varchar(60),
+   NATIONALITY          char(60),
+   PLAYERNUMBER         int,
+   DATEOFBIRTH          date,
+   AGE                  int,
+   HEIGHT               float,
+   WEIGHT               float,
+   POSITION             char(20),
+   PHOTO                char(150),
+   primary key (PLAYERID)
+);
+
+/*==============================================================*/
+/* Table : PLAYERDETAILS                                        */
+/*==============================================================*/
+create table PLAYERDETAILS
+(
+   PLAYERDETAILSID            int not null auto_increment,
+   PLAYERID           int not null,
+   ASSISTS            int,
+   PASSES             int,
+   PASSESPERMATCH     int,
+   BIGCHANCESCREATED  int,
+   YELLOWCARDS        int,
+   HEIGHTREDCARDS     int,
+   FOULS              int,
+   OFFSIDES           int,
+   primary key (PLAYERDETAILSID)
+);
+
+/*==============================================================*/
+/* Table : RAPPORT_DETAILS                                       */
+/*==============================================================*/
+create table RAPPORT_DETAILS
+(
+   RAPPORT_DETAILSID     int not null auto_increment,
+   MATCHID              int not null,
+   RAPPORTID            int not null,
+   PICTUREID           int not null,
+   VIDEOID              int not null,
+   primary key (RAPPORT_DETAILSID)
+);
+
+/*==============================================================*/
+/* Table : RAPPORT_MATCH                                         */
+/*==============================================================*/
+create table RAPPORT_MATCH
+(
+   RAPPORTID            int not null auto_increment,
+   CONTENT              text,
+   primary key (RAPPORTID)
+);
+
+/*==============================================================*/
+/* Table : REACTION                                             */
+/*==============================================================*/
+create table REACTION
+(
+   REACTIONID           int not null auto_increment,
+   BLOGID               char(10) not null,
+   COMMENT              text,
+   _LIKE               bool,
+   USERNAME             char(60),
+   primary key (REACTIONID)
+);
+
+/*==============================================================*/
+/* Table : TEAM                                                 */
+/*==============================================================*/
+create table TEAM
+(
+   TEAMID               int not null auto_increment,
+   LEAGUEID              int not null,
+   TEAMNAME             varchar(60),
+   CREATIONDATE         date,
+   COUNTRY              char(60),
+   NUMBEROFPLAYER       int,
+   RANK                 int,
+   PRESEDENT            char(60),
+   CITYNAME             char(10),
+   LOGO                 text,
+   primary key (TEAMID)
+);
+
+/*==============================================================*/
+/* Table : TEAM_NATIONAL                                         */
+/*==============================================================*/
+create table TEAM_NATIONAL
+(
+   TEAM_NATIONALID              int not null auto_increment,
+   TEAMNAME             varchar(60),
+   CREATIONDATE         date,
+   COUNTRY              char(60),
+   NUMBEROFPLAYER       int,
+   RANK                 int,
+   PRESEDENT            char(60),
+   LOGO                 text,
+   primary key (TEAM_NATIONALID)
+);
+
+/*==============================================================*/
+/* Table : VIDEO                                                */
+/*==============================================================*/
+create table VIDEO
+(
+   VIDEOID              int not null,
+   PATH                 char(200),
+   primary key (VIDEOID)
+);
+
+alter table BLOG add constraint FK_BLOG_PICTURE foreign key (PICTUREID)
+      references PICTURE (PICTUREID) on delete restrict on update restrict;
+
+alter table BLOG add constraint FK_BLOG_VIDEO foreign key (VIDEOID)
+      references VIDEO (VIDEOID) on delete restrict on update restrict;
+
+alter table BLOG add constraint FK_BLOG_NEWS foreign key (NEWSID)
+      references NEWS (NEWSID) on delete restrict on update restrict;
+
+alter table CITY add constraint FK_CITY_COUNTRY foreign key (COUNTRYID)
+      references COUNTRY (COUNTRYID) on delete restrict on update restrict;
+
+alter table COACH add constraint FK_COACH_TEAM foreign key (TEAMID)
+      references TEAM (TEAMID) on delete restrict on update restrict;
+
+alter table _MATCH add constraint FK_MATCH_LEAGUE foreign key (LEAGUEID)
+      references LEAGUE (LEAGUEID) on delete restrict on update restrict;
+
+alter table _MATCH add constraint FK_MATCH_TEAM_A foreign key (TEAMA)
+      references TEAM (TEAMID) on delete restrict on update restrict;
+
+alter table _MATCH add constraint FK_MATCH_TEAM_B foreign key (TEAMB)
+      references TEAM (TEAMID) on delete restrict on update restrict;
+
+alter table MATCHINFOS add constraint FK_MATCHINFOS_MATCH foreign key (MATCHID)
+      references _MATCH (MATCHID) on delete restrict on update restrict;
+
+alter table MATCHINFOS add constraint FK_MATCHINFOS_PLAYER foreign key (PLAYERID)
+      references PLAYER (PLAYERID) on delete restrict on update restrict;
+
+alter table PLAYERDETAILS add constraint FK_PLAYERDETAILS_PLAYER foreign key (PLAYERID)
+      references PLAYER (PLAYERID) on delete restrict on update restrict;
+
+alter table PLAYER add constraint FK_PLAYER_TEAM_NATIONAL foreign key (TEAM_NATIONALID)
+      references TEAM_NATIONAL (TEAM_NATIONALID) on delete restrict on update restrict;
+
+alter table PLAYER add constraint FK_PLAYER_TEAM foreign key (TEAMID)
+      references TEAM (TEAMID) on delete restrict on update restrict;
+
+alter table RAPPORT_DETAILS add constraint FK_RAPPORT_DETAI_MATCH foreign key (MATCHID)
+      references _MATCH (MATCHID) on delete restrict on update restrict;
+
+alter table RAPPORT_DETAILS add constraint FK_RAPPORT_DETAI_RAPPORT_MATCH foreign key (RAPPORTID)
+      references RAPPORT_MATCH (RAPPORTID) on delete restrict on update restrict;
+
+alter table RAPPORT_DETAILS add constraint FK_RAPPORT_DETAILS_PICTURE foreign key (PICTUREID)
+      references PICTURE (PICTUREID) on delete restrict on update restrict;
+
+alter table RAPPORT_DETAILS add constraint FK_RAPPORT_DETAILS_VIDEO foreign key (VIDEOID)
+      references VIDEO (VIDEOID) on delete restrict on update restrict;
+
+alter table REACTION add constraint FK_REACTION_BLOG foreign key (BLOGID)
+      references BLOG (BLOGID) on delete restrict on update restrict;
+
+alter table TEAM add constraint FK_TEAM_LEAGUE foreign key (LEAGUEID)
+      references LEAGUE (LEAGUEID) on delete restrict on update restrict;

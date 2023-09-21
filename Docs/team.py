@@ -8,8 +8,8 @@ from selenium.webdriver.support import expected_conditions as EC
 import csv
 import json
 
-path="C:\\Program Files (x86)\\chromedriver.exe"
-driver=webdriver.Chrome()
+# path="C:\\Program Files (x86)\\chromedriver.exe"
+# driver=webdriver.Chrome()
 # url="https://www.premierleague.com/clubs"
 
 # driver.get(url)
@@ -24,12 +24,9 @@ driver=webdriver.Chrome()
 #     column_items=row_items[i].find_element(By.TAG_NAME,'a')
 #     print(column_items.get_attribute('href'))
     
-with open('C:\\xampp\\htdocs\\worldkoora\\Docs\\PremierLeague.csv',mode='r') as file_csv:
+with open('Docs/PreamierLeagueTeams.csv',mode='r') as file_csv:
         csv_reader = csv.reader(file_csv, delimiter=',')
         list1=[]
         cp=0
         for ff in csv_reader:
-            list1.append(ff)
-        dictionary={}
-        list2=[]
-        
+            list1.append(ff[0])

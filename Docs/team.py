@@ -25,11 +25,11 @@ driver=webdriver.Chrome()
 #     print(column_items.get_attribute('href'))
     
 with open('C:\\xampp\\htdocs\\worldkoora\\Docs\\PremierLeague.csv',mode='r') as file_csv:
-        csv_reader = csv.reader(file_csv, delimiter=',')
-        list1=[]
-        cp=0
-        for ff in csv_reader:
-            list1.append(ff)
-        dictionary={}
-        list2=[]
+    csv_reader = csv.reader(file_csv, delimiter=',')
+    list1=[]
+    cp=0
+    for ff in csv_reader:
+        list1.append(ff)
+    dictionary={}
+    list2=[]
         

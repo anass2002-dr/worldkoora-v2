@@ -7,7 +7,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import csv
 import json
-
+import requests
 
 path="C:\\Program Files (x86)\\chromedriver.exe"
 driver=webdriver.Chrome()
@@ -40,39 +40,93 @@ driver=webdriver.Chrome()
     
 # for ll in list_links:
 #     print(ll)
-
+#####-------------table teams --------------------##
 with open('Docs\\league.csv',mode='r') as csv_league:
     csv_reader = csv.reader(csv_league, delimiter=',')
     leagues=[]
+    table_teams_dict={}
     for ff in csv_league:
         leagues.append(ff)
-    driver.get(leagues[0].strip())
-    title=driver.find_element(By.CLASS_NAME,'ROA474A54iOw7VMIYeSY')
-    table=driver.find_element(By.CLASS_NAME,'ag-center-cols-container')
-    table_items=table.find_elements(By.CLASS_NAME,'ag-row-level-0')
-    for item in table_items:
-        team=item.find_element(By.CLASS_NAME,'XiH7Q7qqQpsHxb_Z3I6N')
-        team_name=team.get_attribute('title')
-        logo=team.find_element(By.CLASS_NAME,'pk-badge').get_attribute('src')
-        played=item.find_elements(By.CLASS_NAME,'ag-cell')
+    list_leagues=[]
+    for league in leagues:
+        driver.get(league.strip())
+        dict_leagues={}
+        list_teams_infos=[]
+        time.sleep(20)
+        title=driver.find_element(By.CLASS_NAME,'ROA474A54iOw7VMIYeSY')
+        time.sleep(5)
+        table=driver.find_element(By.CLASS_NAME,'ag-center-cols-container')
+        time.sleep(5)
+
+        table_items=table.find_elements(By.CLASS_NAME,'ag-row-level-0')
+        time.sleep(5)
+        cp=1
+        for item in table_items:
+            dict_teams_infos={}
+            team=item.find_element(By.CLASS_NAME,'XiH7Q7qqQpsHxb_Z3I6N')
+            
+            team_name=team.get_attribute('title')
+            logo=team.find_element(By.CLASS_NAME,'pk-badge').get_attribute('src')
+            img_data = requests.get(logo).content
+            with open(f'images\\table_teames_logo\\{team_name}.png', 'wb') as handler:
+                handler.write(img_data)
+            infos=item.find_elements(By.CLASS_NAME,'ag-cell')
+            dict_teams_infos['id_team']=cp
+            dict_teams_infos['team Name']=team_name
+            dict_leagues['logo path']=f'images\\table_teames_logo\\{team_name}.png'
+            dict_teams_infos['played']=infos[1].text
+            dict_teams_infos['won']=infos[2].text
+            dict_teams_infos['drawn']=infos[3].text
+            dict_teams_infos['lost']=infos[4].text
+            dict_teams_infos['goals']=infos[5].text
+            dict_teams_infos['against']=infos[6].text
+            dict_teams_infos['goal_differences']=infos[7].text
+            dict_teams_infos['points']=infos[8].text
+            list_teams_infos.append(dict_teams_infos)
+            cp+=1
+        dict_leagues[title]=list_teams_infos
+        list_leagues.append(dict_leagues)   
+    table_teams_dict['table leagues']=list_leagues
+    with open('Docs/table_teams.json','w') as table_teams:
+        json.dump(table_teams_dict,table_teams)
+    # driver.get(leagues[0].strip())
+    # time.sleep(20)
+    # title=driver.find_element(By.CLASS_NAME,'ROA474A54iOw7VMIYeSY')
+    # time.sleep(5)
+    # table=driver.find_element(By.CLASS_NAME,'ag-center-cols-container')
+    # time.sleep(5)
+
+    # table_items=table.find_elements(By.CLASS_NAME,'ag-row-level-0')
+    # time.sleep(5)
+    
+    # for item in table_items:
+    #     team=item.find_element(By.CLASS_NAME,'XiH7Q7qqQpsHxb_Z3I6N')
         
-        played=played[1].text
-        print(team_name)
-        print(played)
-        print(logo)
-    # for league in leagues:
-    #     driver.get(league.strip())
-    #     title=driver.find_element(By.CLASS_NAME,'ROA474A54iOw7VMIYeSY')
-    #     table=driver.find_element(By.CLASS_NAME,'ag-center-cols-container')
-    #     table_items=table.find_elements(By.CLASS_NAME,'ag-row-level-0')
-    #     for item in table_items:
-    #         team=item.find_element(By.CLASS_NAME,'XiH7Q7qqQpsHxb_Z3I6N')
-    #         team_name=team.get_attribute('title')
-    #         logo=team.find_element(By.CLASS_NAME,'pk-badge').get_attribute('src')
-            
-    #         print(team_name)
-    #         print(logo)
-            
+    #     team_name=team.get_attribute('title')
+    #     logo=team.find_element(By.CLASS_NAME,'pk-badge').get_attribute('src')
+        
+    #     infos=item.find_elements(By.CLASS_NAME,'ag-cell')
+        
+    #     played=infos[1].text
+    #     won=infos[2].text
+    #     drawn=infos[3].text
+    #     lost=infos[4].text
+    #     goals=infos[5].text
+    #     against=infos[6].text
+    #     goal_differences=infos[7].text
+    #     points=infos[8].text
+    #     print(team_name)
+    #     print(logo)
+    #     print(played)
+    #     print(won)
+    #     print(drawn)
+    #     print(lost)
+    #     print(goals)
+    #     print(against)
+    #     print(goal_differences)
+    #     print(points)
+    
+                
 # with open('Docs\\league.csv',mode='r') as file_csv:
 #     csv_reader = csv.reader(file_csv, delimiter=',')
 #     leagues=[]

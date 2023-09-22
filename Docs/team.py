@@ -11,8 +11,9 @@ import json
 
 path="C:\\Program Files (x86)\\chromedriver.exe"
 driver=webdriver.Chrome()
+
+###-------------------premier league teams links----------------------##
 # url="https://www.premierleague.com/clubs"
-# url2="https://www.uefa.com/nationalassociations/"
 # driver.get(url)
 # time.sleep(5)
 # div_parent=driver.find_elements(By.CLASS_NAME,"indexAllTime")
@@ -26,8 +27,50 @@ driver=webdriver.Chrome()
 #     print(column_items.get_attribute('href'))
 
 
+# url2="https://www.uefa.com/nationalassociations/"
 
+# driver.get(url2)
+# time.sleep(3)
+# list_table=driver.find_elements(By.CLASS_NAME,'standings-module')
+# list_links=[]
+# for link in list_table:
+#     time.sleep(3)
+#     links_table=link.find_element(By.TAG_NAME,'a')
+#     list_links.append(links_table.get_attribute('href'))
+    
+# for ll in list_links:
+#     print(ll)
 
+with open('Docs\\league.csv',mode='r') as csv_league:
+    csv_reader = csv.reader(csv_league, delimiter=',')
+    leagues=[]
+    for ff in csv_league:
+        leagues.append(ff)
+    driver.get(leagues[0].strip())
+    title=driver.find_element(By.CLASS_NAME,'ROA474A54iOw7VMIYeSY')
+    table=driver.find_element(By.CLASS_NAME,'ag-center-cols-container')
+    table_items=table.find_elements(By.CLASS_NAME,'ag-row-level-0')
+    for item in table_items:
+        team=item.find_element(By.CLASS_NAME,'XiH7Q7qqQpsHxb_Z3I6N')
+        team_name=team.get_attribute('title')
+        logo=team.find_element(By.CLASS_NAME,'pk-badge').get_attribute('src')
+        # played=item.find_elements(By.CLASS_NAME,'ag-cell')
+        print(team_name)
+        # print(played[0].text)
+        print(logo)
+    # for league in leagues:
+    #     driver.get(league.strip())
+    #     title=driver.find_element(By.CLASS_NAME,'ROA474A54iOw7VMIYeSY')
+    #     table=driver.find_element(By.CLASS_NAME,'ag-center-cols-container')
+    #     table_items=table.find_elements(By.CLASS_NAME,'ag-row-level-0')
+    #     for item in table_items:
+    #         team=item.find_element(By.CLASS_NAME,'XiH7Q7qqQpsHxb_Z3I6N')
+    #         team_name=team.get_attribute('title')
+    #         logo=team.find_element(By.CLASS_NAME,'pk-badge').get_attribute('src')
+            
+    #         print(team_name)
+    #         print(logo)
+            
 # with open('Docs\\league.csv',mode='r') as file_csv:
 #     csv_reader = csv.reader(file_csv, delimiter=',')
 #     leagues=[]

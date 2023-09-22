@@ -30,6 +30,7 @@ drop table if exists RAPPORT_MATCH;
 drop table if exists REACTION;
 
 drop table if exists TEAM;
+drop table if exists TEAM_STANDING;
 
 drop table if exists TEAM_NATIONAL;
 
@@ -238,6 +239,22 @@ create table TEAM
    CITYNAME             char(10),
    LOGO                 text,
    primary key (TEAMID)
+);
+
+create table TEAM_STANDING
+(
+   TEAM_STANDINGID      int not null auto_increment,
+   TEAMNAME              char(60) not null,
+   LEAGUENAME            char(60) not null,     
+   PLAYED               INT,
+   WON                  INT,
+   DROWN                  INT,
+   LOST                INT,
+   GOAL              int,
+   AGAINST                 int,
+   GOALDIFFERNCE            INT,
+   POINTS             INT,
+   primary key (TEAM_STANDINGID)
 );
 
 /*==============================================================*/

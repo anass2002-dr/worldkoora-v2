@@ -54,9 +54,11 @@ with open('Docs\\league.csv',mode='r') as csv_league:
         team=item.find_element(By.CLASS_NAME,'XiH7Q7qqQpsHxb_Z3I6N')
         team_name=team.get_attribute('title')
         logo=team.find_element(By.CLASS_NAME,'pk-badge').get_attribute('src')
-        # played=item.find_elements(By.CLASS_NAME,'ag-cell')
+        played=item.find_elements(By.CLASS_NAME,'ag-cell')
+        
+        played=played[1].text
         print(team_name)
-        # print(played[0].text)
+        print(played)
         print(logo)
     # for league in leagues:
     #     driver.get(league.strip())

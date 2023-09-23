@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import csv
 import json
 import requests
-
+import os
 path="C:\\Program Files (x86)\\chromedriver.exe"
 driver=webdriver.Chrome()
 
@@ -68,9 +68,13 @@ with open('Docs\\league.csv',mode='r') as csv_league:
             team_name=team.get_attribute('title')
             logo=team.find_element(By.CLASS_NAME,'pk-badge').get_attribute('src')
             img_data = requests.get(logo).content
-            with open(f'images\\table_teames_logo\\{team_name}.png', 'wb') as handler:
-                handler.write(img_data)
+            path=f'images\\table_teames_logo\\{team_name}.png'
+            isExisting=os.path.exists(path)
+            if isExisting==False:
+                with open(f'images\\table_teames_logo\\{team_name}.png', 'wb') as handler:
+                    handler.write(img_data)
             infos=item.find_elements(By.CLASS_NAME,'ag-cell')
+            print(team_name)
             dict_teams_infos['id_team']=cp
             dict_teams_infos['team Name']=team_name
             dict_leagues['logo path']=f'images\\table_teames_logo\\{team_name}.png'

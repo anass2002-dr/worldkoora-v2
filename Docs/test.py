@@ -10,14 +10,18 @@ import json
 import time
 import schedule
 import requests
+import os
 # path="C:\\Program Files (x86)\\chromedriver.exe"
 # driver=webdriver.Chrome()
 
  #hello    
  
-img_data = requests.get('https://img.uefa.com/imgml/TP/teams/logos/18x18/52919.png').content
-with open('Docs\\image_name.jpg', 'wb') as handler:
-    handler.write(img_data)
+# img_data = requests.get('https://img.uefa.com/imgml/TP/teams/logos/18x18/52919.png').content
+path='images\\table_teames_logo\\Burnley.png'
+isExisting=os.path.exists(path)
+print(isExisting)
+# with open('Docs\\image_name.jpg', 'wb') as handler:
+#     handler.write(img_data)
 # def schedule_fun():
 
 #     with open('C:\\xampp\\htdocs\\worldkoora\\Docs\\csv_test.csv',mode='r') as file_csv:

@@ -11,15 +11,74 @@ import time
 import schedule
 import requests
 import os
-# path="C:\\Program Files (x86)\\chromedriver.exe"
-# driver=webdriver.Chrome()
+path="C:\\Program Files (x86)\\chromedriver.exe"
+driver=webdriver.Chrome()
+
+with open('Docs\\league.csv',mode='r') as csv_league:
+    csv_reader = csv.reader(csv_league, delimiter=',')
+    leagues=[]
+    table_teams_dict={}
+    for ff in csv_league:
+        leagues.append(ff)
+    for league in leagues:
+        driver.get(league.strip())
+        table=object
+        table_length=''
+        title=''
+        while(title==''):
+            try:
+                title=driver.find_element(By.CLASS_NAME,'ROA474A54iOw7VMIYeSY')
+            except Exception as e:
+                print(e)
+                print('i''m sleeping......')
+                time.sleep(5)
+                
+                title=''
+                
+            print("title not founding yet :)....")
+        
+            # title=title.text
+        print(f'title is {title.text}')
+        driver.refresh()
+        while(table_length==''):
+            try:
+                table=driver.find_element(By.CLASS_NAME,'ag-center-cols-container')
+                table_length=table
+            except Exception as e:
+                print(e)
+                print('i''m sleeping......')
+                time.sleep(5)
+                table_length=''
+                
+            print("table not founding yet :)....")
+        print(f"table : {table_length}")
+            
+        table_items_length=0
+        print("table found...")
+        while(table_items_length==0):
+            try:
+                table_items=table.find_elements(By.CLASS_NAME,'ag-row-level-0')
+                table_items_length=len(table_items)
+            except Exception as e:
+                print(e)
+                print('i''m sleeping......')
+                time.sleep(5)
+                table_items_length=0
+                
+            print("table items not founding yet :)....")
+        
+        print(f"length is {table_items_length}")
+            
+        
+
+
 
  #hello    
  
 # img_data = requests.get('https://img.uefa.com/imgml/TP/teams/logos/18x18/52919.png').content
-path='images\\table_teames_logo\\Burnley.png'
-isExisting=os.path.exists(path)
-print(isExisting)
+# path='images\\table_teames_logo\\Burnley.png'
+# isExisting=os.path.exists(path)
+# print(isExisting)
 # with open('Docs\\image_name.jpg', 'wb') as handler:
 #     handler.write(img_data)
 # def schedule_fun():

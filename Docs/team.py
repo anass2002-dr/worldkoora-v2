@@ -52,32 +52,106 @@ with open('Docs\\league.csv',mode='r') as csv_league:
         driver.get(league.strip())
         dict_leagues={}
         list_teams_infos=[]
-        time.sleep(20)
-        title=driver.find_element(By.CLASS_NAME,'ROA474A54iOw7VMIYeSY')
-        time.sleep(5)
-        table=driver.find_element(By.CLASS_NAME,'ag-center-cols-container')
-        time.sleep(5)
+        title=''
+        while(title==''):
+            try:
+                title=driver.find_element(By.CLASS_NAME,'ROA474A54iOw7VMIYeSY')
+            except Exception as e:
+                print('check your connection internet brooo.....')
+                print('i''m sleeping now untile title are finding.....')
+                time.sleep(5)
+                driver.refresh()
+                
+                title=''
+        print(title.text)   
 
-        table_items=table.find_elements(By.CLASS_NAME,'ag-row-level-0')
-        time.sleep(5)
+        table=object
+        table_length=''
+        while(table_length==''):
+            try:
+                table=driver.find_element(By.CLASS_NAME,'ag-center-cols-container')
+                table_length=table
+            except Exception as e:
+                print('check your connection internet brooo.....')
+                print('i''m sleeping now untile table are finding.....')
+                time.sleep(5)
+                driver.refresh()
+                
+                table_length=''
+        print('table finding')
+
+        table_items=object
+        table_items_length=0
+        while(table_items_length==0):
+            try:
+                table_items=table.find_elements(By.CLASS_NAME,'ag-row-level-0')
+                table_items_length=len(table_items)
+            except Exception as e:
+                print('check your connection internet brooo.....')
+                print('i''m sleeping now untile table_items_length are finding.....')
+                time.sleep(5)
+                driver.refresh()
+                
+                table_items_length=0
+        print(f'finally we find the table items of {title.text} ')  
+                      
         cp=1
         for item in table_items:
             dict_teams_infos={}
-            team=item.find_element(By.CLASS_NAME,'XiH7Q7qqQpsHxb_Z3I6N')
             
+            team=object
+            team_length=''
+            while(team_length==''):
+                try:
+                    team=item.find_element(By.CLASS_NAME,'XiH7Q7qqQpsHxb_Z3I6N')
+                    team_length=team
+                except Exception as e:
+                    print('check your connection internet brooo.....')
+                    print('i''m sleeping now untile team name are finding.....')
+                    time.sleep(5)
+                    driver.refresh()
+                    
+                    team_length=''
             team_name=team.get_attribute('title')
-            logo=team.find_element(By.CLASS_NAME,'pk-badge').get_attribute('src')
+            print(team_name)
+                        
+            
+            logo=object
+            logo_length=''
+            while(logo_length==''):
+                try:
+                    logo=team.find_element(By.CLASS_NAME,'pk-badge').get_attribute('src')
+                    logo_length=logo
+                except Exception as e:
+                    print('check your connection internet brooo.....')
+                    print('i''m sleeping now untile logo path are finding.....')
+                    time.sleep(5)
+                    driver.refresh()
+                    logo_length=''
             img_data = requests.get(logo).content
             path=f'images\\table_teames_logo\\{team_name}.png'
             isExisting=os.path.exists(path)
             if isExisting==False:
                 with open(f'images\\table_teames_logo\\{team_name}.png', 'wb') as handler:
                     handler.write(img_data)
-            infos=item.find_elements(By.CLASS_NAME,'ag-cell')
-            print(team_name)
+    
+            infos=object
+            infos_leng=0
+            while(infos_leng<10):
+                try:
+                    infos=item.find_elements(By.CLASS_NAME,'ag-cell')
+                    infos_leng=len(infos)
+                except Exception as e:
+                    print('check your connection internet brooo.....')
+                    print('i''m sleeping now untile team infos are finding.....')
+                    time.sleep(5)
+                    driver.refresh()
+                    infos_leng=0
+            # time.sleep(20)
+            # print(team_name)
             dict_teams_infos['id_team']=cp
             dict_teams_infos['team Name']=team_name
-            dict_leagues['logo path']=f'images\\table_teames_logo\\{team_name}.png'
+            dict_teams_infos['logo path']=f'images\\table_teames_logo\\{team_name}.png'
             dict_teams_infos['played']=infos[1].text
             dict_teams_infos['won']=infos[2].text
             dict_teams_infos['drawn']=infos[3].text

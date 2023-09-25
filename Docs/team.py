@@ -114,8 +114,7 @@ with open('Docs\\league.csv',mode='r') as csv_league:
                     team_length=''
             team_name=team.get_attribute('title')
             print(team_name)
-                        
-            
+          
             logo=object
             logo_length=''
             while(logo_length==''):

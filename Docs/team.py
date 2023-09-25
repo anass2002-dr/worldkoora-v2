@@ -164,70 +164,15 @@ with open('Docs\\league.csv',mode='r') as csv_league:
             list_teams_infos.append(dict_teams_infos)
             cp+=1
         dict_leagues[title]=list_teams_infos
-        list_leagues.append(dict_leagues)   
+        with open(f'Docs/{title}.json','w') as table_1:
+            json.dump(dict_leagues,table_1)
+        list_leagues.append(dict_leagues)  
+        
     table_teams_dict['table leagues']=list_leagues
     with open('Docs/table_teams.json','w') as table_teams:
         json.dump(table_teams_dict,table_teams)
-    # driver.get(leagues[0].strip())
-    # time.sleep(20)
-    # title=driver.find_element(By.CLASS_NAME,'ROA474A54iOw7VMIYeSY')
-    # time.sleep(5)
-    # table=driver.find_element(By.CLASS_NAME,'ag-center-cols-container')
-    # time.sleep(5)
-
-    # table_items=table.find_elements(By.CLASS_NAME,'ag-row-level-0')
-    # time.sleep(5)
     
-    # for item in table_items:
-    #     team=item.find_element(By.CLASS_NAME,'XiH7Q7qqQpsHxb_Z3I6N')
-        
-    #     team_name=team.get_attribute('title')
-    #     logo=team.find_element(By.CLASS_NAME,'pk-badge').get_attribute('src')
-        
-    #     infos=item.find_elements(By.CLASS_NAME,'ag-cell')
-        
-    #     played=infos[1].text
-    #     won=infos[2].text
-    #     drawn=infos[3].text
-    #     lost=infos[4].text
-    #     goals=infos[5].text
-    #     against=infos[6].text
-    #     goal_differences=infos[7].text
-    #     points=infos[8].text
-    #     print(team_name)
-    #     print(logo)
-    #     print(played)
-    #     print(won)
-    #     print(drawn)
-    #     print(lost)
-    #     print(goals)
-    #     print(against)
-    #     print(goal_differences)
-    #     print(points)
     
-                
-# with open('Docs\\league.csv',mode='r') as file_csv:
-#     csv_reader = csv.reader(file_csv, delimiter=',')
-#     leagues=[]
-#     cp=0
-#     all_league={}
-#     all_league_list=[]
-#     for ff in csv_reader:
-#         leagues.append(ff)
-#     for league in leagues:
-#         league_dict={}
-#         league_dict['Id']=league[0]
-#         league_dict['LeagueName']=league[1]
-#         league_dict['Country']=league[2]
-#         league_dict['DateCreation']=league[3]
-#         all_league_list.append(league_dict)
-#     all_league['leagues']=all_league_list
-#     with open('Docs/all_leagues.json','w') as leaguesJson:
-#             json.dump(all_league,leaguesJson)
-
-####---------------------save picture-------------------##
-# import requests
-
-# img_data = requests.get(image_url).content
-# with open('image_name.jpg', 'wb') as handler:
-#     handler.write(img_data)
+    
+    
+    

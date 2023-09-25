@@ -60,7 +60,7 @@ with open('Docs\\league.csv',mode='r') as csv_league:
                 print('check your connection internet brooo.....')
                 print('i''m sleeping now untile title are finding.....')
                 time.sleep(5)
-                driver.refresh()
+                # driver.refresh()
                 
                 title=''
         print(title.text)   
@@ -75,7 +75,7 @@ with open('Docs\\league.csv',mode='r') as csv_league:
                 print('check your connection internet brooo.....')
                 print('i''m sleeping now untile table are finding.....')
                 time.sleep(5)
-                driver.refresh()
+                # driver.refresh()
                 
                 table_length=''
         print('table finding')
@@ -90,7 +90,7 @@ with open('Docs\\league.csv',mode='r') as csv_league:
                 print('check your connection internet brooo.....')
                 print('i''m sleeping now untile table_items_length are finding.....')
                 time.sleep(5)
-                driver.refresh()
+                # driver.refresh()
                 
                 table_items_length=0
         print(f'finally we find the table items of {title.text} ')  
@@ -109,7 +109,7 @@ with open('Docs\\league.csv',mode='r') as csv_league:
                     print('check your connection internet brooo.....')
                     print('i''m sleeping now untile team name are finding.....')
                     time.sleep(5)
-                    driver.refresh()
+                    # driver.refresh()
                     
                     team_length=''
             team_name=team.get_attribute('title')
@@ -126,10 +126,12 @@ with open('Docs\\league.csv',mode='r') as csv_league:
                     print('check your connection internet brooo.....')
                     print('i''m sleeping now untile logo path are finding.....')
                     time.sleep(5)
-                    driver.refresh()
+                    # driver.refresh()
                     logo_length=''
             img_data = requests.get(logo).content
-            path=f'images\\table_teames_logo\\{team_name}.png'
+            length_img=len(img_data)
+            path_type=img_data[-3:length_img].lower
+            path=f'images\\table_teames_logo\\{team_name}.{path_type}'
             isExisting=os.path.exists(path)
             if isExisting==False:
                 with open(f'images\\table_teames_logo\\{team_name}.png', 'wb') as handler:
@@ -145,7 +147,7 @@ with open('Docs\\league.csv',mode='r') as csv_league:
                     print('check your connection internet brooo.....')
                     print('i''m sleeping now untile team infos are finding.....')
                     time.sleep(5)
-                    driver.refresh()
+                    # driver.refresh()
                     infos_leng=0
             # time.sleep(20)
             # print(team_name)

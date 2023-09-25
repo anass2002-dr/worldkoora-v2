@@ -19,5 +19,9 @@ with open('Docs\\tables_links.csv', mode='r') as tables_links:
     tables_list=[]
     for tab in tables_links:
         tables_list.append(tab)
-    for t in tables_list:
-        print(t.strip())
+    
+    for t in range(0,5):
+        url=tables_list[t].strip()
+        driver.get(url) 
+        title=driver.find_element(By.CLASS_NAME,'header_title__k8WIS')
+        print(title.text)

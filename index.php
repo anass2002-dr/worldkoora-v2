@@ -7,18 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>SportsMagazine Home Page</title>
-
+    <?php
+    include './style.php'
+    ?>
     <!-- Css Files -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/font-awesome.css" rel="stylesheet">
-    <link href="css/flaticon.css" rel="stylesheet">
-    <link href="css/slick-slider.css" rel="stylesheet">
-    <link href="css/fancybox.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
-    <link href="css/color.css" rel="stylesheet">
-    <link href="css/responsive.css" rel="stylesheet">
-    <!--/!--[if lte IE 9]-->
-    <link rel="stylesheet" href="../../css/chosen.html"> <!--[endif]--//-->
+    <!--[endif]--//-->
 
 
     <!-- html5 shim and Respond.js for IE8 support of html5 elements and media queries -->
@@ -828,7 +821,7 @@
 
         <!--// Footer \\-->
         <?php
-            include "footer.php";
+        include "footer.php";
         ?>
         <!--// Footer \\-->
 

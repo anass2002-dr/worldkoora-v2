@@ -12,34 +12,6 @@ import os
 path="C:\\Program Files (x86)\\chromedriver.exe"
 driver=webdriver.Chrome()
 
-###-------------------premier league teams links----------------------##
-# url="https://www.premierleague.com/clubs"
-# driver.get(url)
-# time.sleep(5)
-# div_parent=driver.find_elements(By.CLASS_NAME,"indexAllTime")
-# time.sleep(5)
-# table_team=div_parent[1].find_element(By.TAG_NAME,"tbody")
-# time.sleep(5)
-# row_items=table_team.find_elements(By.TAG_NAME,'tr')
-# time.sleep(5)
-# for i in range(0,len(row_items)):
-#     column_items=row_items[i].find_element(By.TAG_NAME,'a')
-#     print(column_items.get_attribute('href'))
-
-
-# url2="https://www.uefa.com/nationalassociations/"
-
-# driver.get(url2)
-# time.sleep(3)
-# list_table=driver.find_elements(By.CLASS_NAME,'standings-module')
-# list_links=[]
-# for link in list_table:
-#     time.sleep(3)
-#     links_table=link.find_element(By.TAG_NAME,'a')
-#     list_links.append(links_table.get_attribute('href'))
-    
-# for ll in list_links:
-#     print(ll)
 #####-------------table teams --------------------##
 with open('Docs\\league.csv',mode='r') as csv_league:
     csv_reader = csv.reader(csv_league, delimiter=',')

@@ -14,6 +14,8 @@
     <?php
     include './header.php'
     ?>
+
+
     <div class="widget widget_team_ranking">
         <div class="sportsmagazine-fancy-title">
             <h2>تصنيفات الفرق</h2>
@@ -34,8 +36,8 @@
         <div class="ranking-content-table">
             <ul class="ranking-content-row">
                 <li>1</li>
-                <li><img src="images/table_teames_logo/Barcelona.png" alt=""></li>
                 <li>
+                    <!-- <img src="images/table_teames_logo/Barcelona.png" alt=""> -->
                     <div class="ranking-logo"><span>L.A Pirates</span> <small>Bebop Institute</small> </div>
                 </li>
                 <li>08</li>

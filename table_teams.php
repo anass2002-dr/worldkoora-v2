@@ -8,6 +8,7 @@
     <?php
     include './style.php'
     ?>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
 </head>
 
 <body>
@@ -15,11 +16,43 @@
     include './header.php'
     ?>
 
+    <div class="table_ranked">
 
-    <div class="widget widget_team_ranking">
-        <div class="sportsmagazine-fancy-title">
-            <h2>تصنيفات الفرق</h2>
-        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+    <!-- <div class="m-5">
+
         <div class="ranking-title-table">
             <ul class="ranking-title-row">
                 <li>تصنيفات الفرق</li>
@@ -37,7 +70,6 @@
             <ul class="ranking-content-row">
                 <li>1</li>
                 <li>
-                    <!-- <img src="images/table_teames_logo/Barcelona.png" alt=""> -->
                     <div class="ranking-logo"><span>L.A Pirates</span> <small>Bebop Institute</small> </div>
                 </li>
                 <li>08</li>
@@ -110,11 +142,13 @@
             </ul>
         </div>
 
-    </div>
+    </div> -->
 
     <?php
     include './footer.php'
     ?>
+    <script src="node_modules/@popperjs/core/dist/cjs/popper.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
 </body>
 
 </html>

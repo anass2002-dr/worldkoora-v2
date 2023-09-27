@@ -31,9 +31,7 @@ with open('Docs\\league.csv',mode='r') as csv_league:
             print(title.text)   
             table=driver.find_element(By.CLASS_NAME,'ag-center-cols-container')
                     
-            print('table finding')
-
-            
+                       
             
             table_items=table.find_elements(By.CLASS_NAME,'ag-row-level-0')
             table_items_length=len(table_items)
